@@ -1,17 +1,16 @@
-import { db } from "firebaseConfig";
+import { db } from 'firebaseConfig'
 
-const addDataToFirestore = (collection: FirestoreCollection, data: Object) => {
-  const uid = new Date().getTime().toString();
-
-  db.collection(collection)
-    .doc(uid)
-    .set(data)
+const addProject = (userId: string, data: Object) => {
+  db.collection('users')
+    .doc(userId)
+    .collection('projects')
+    .add(data)
     .then(function () {
-      alert("Document successfully written!");
+      alert('A new project was successfully created!')
     })
     .catch(function (error: any) {
-      alert(`Error writing document: ${error}`);
-    });
-};
+      alert(`Error: ${error}`)
+    })
+}
 
-export { addDataToFirestore };
+export { addProject }

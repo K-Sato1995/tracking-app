@@ -1,1 +1,1 @@
-type FirestoreCollection = "projects";
+type FirestoreCollection = 'users'
