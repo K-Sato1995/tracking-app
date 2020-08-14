@@ -13,4 +13,7 @@ const addProject = (userId: string, data: Object) => {
     })
 }
 
-export { addProject }
+const findOrCreateUser = (userId: string, data: Object) => {
+  db.collection('users').doc(userId).set(data, { merge: true })
+}
+export { addProject, findOrCreateUser }
