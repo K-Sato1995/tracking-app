@@ -1,0 +1,1 @@
+type FirestoreCollection = "projects";
