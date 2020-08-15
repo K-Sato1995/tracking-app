@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
 
 const Home = () => {
-  const { user, logout } = useAuth0()
+  const { user } = useAuth0()
   const { sub: userId, email } = user
   const [projects, setProjects] = useState<Project[]>([])
 
@@ -24,7 +24,6 @@ const Home = () => {
 
   return (
     <div className="App">
-      <button onClick={() => logout()}>Log Out</button>
       <button
         onClick={() =>
           addProject(userId, {
