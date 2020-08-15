@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { withAuthenticationRequired } from '@auth0/auth0-react'
 import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
 
-const App = () => {
+const Home = () => {
   const { user, logout } = useAuth0()
   const { sub: userId, email } = user
   const [projects, setProjects] = useState<Project[]>([])
@@ -43,6 +42,4 @@ const App = () => {
   )
 }
 
-export default withAuthenticationRequired(App, {
-  onRedirecting: () => <div>Loading</div>,
-})
+export default Home
