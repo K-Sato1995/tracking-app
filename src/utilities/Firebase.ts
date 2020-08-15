@@ -1,5 +1,4 @@
 import { db } from 'firebaseConfig'
-
 /*
   Create a new Project.
 */
@@ -26,9 +25,35 @@ const getProjects = async (userId: FirestoreUserId) => {
     .collection('projects')
     .get()
 
-  const data = querySnapshot.docs.map((doc: any) => doc.data())
+  const data = querySnapshot.docs.map((doc: any) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    }
+  })
 
   return data
+}
+
+/*
+  Get a project by id.
+*/
+const getProject = async (
+  userId: FirestoreUserId,
+  projectId: FirestoreProjectId,
+) => {
+  const doc = await db
+    .collection('users')
+    .doc(userId)
+    .collection('projects')
+    .doc(projectId)
+    .get()
+
+  if (doc.exists) {
+    return { id: projectId, ...doc.data() }
+  } else {
+    throw new Error('No such document exists')
+  }
 }
 
 /*
@@ -59,4 +84,4 @@ const addLog = (
 const findOrCreateUser = (userId: FirestoreUserId, data: Object) => {
   db.collection('users').doc(userId).set(data, { merge: true })
 }
-export { addProject, getProjects, addLog, findOrCreateUser }
+export { addProject, getProjects, getProject, addLog, findOrCreateUser }

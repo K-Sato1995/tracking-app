@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Link } from 'react-router-dom'
 import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
 
 const Home = () => {
@@ -35,7 +36,11 @@ const Home = () => {
       </button>
       <ul>
         {projects.map((project, i) => {
-          return <li key={i}>{project.title}</li>
+          return (
+            <li key={i}>
+              <Link to={`project/${project.id}`}>{project.title}</Link>
+            </li>
+          )
         })}
       </ul>
     </div>

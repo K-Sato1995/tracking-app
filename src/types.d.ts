@@ -5,5 +5,6 @@ type FirestoreUserId = 'string'
 type FirestoreProjectId = 'string'
 
 type Project = {
-  title: string
+  id?: string
+  title?: string
 }
