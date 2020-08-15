@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import LogForm from 'components/LogForm'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
 import { getProject } from 'utilities/Firebase'
@@ -34,6 +35,7 @@ const ProjectDetail = () => {
         <li>id: {project.id}</li>
         <li>title: {project.title}</li>
       </ul>
+      <LogForm userId={userId} projectId={projectId} />
     </div>
   )
 }

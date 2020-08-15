@@ -57,6 +57,31 @@ const getProject = async (
 }
 
 /*
+  Get all the projects associated with the user.
+*/
+const getLogs = async (
+  userId: FirestoreUserId,
+  projectId: FirestoreProjectId,
+) => {
+  const querySnapshot = await db
+    .collection('users')
+    .doc(userId)
+    .collection('projects')
+    .doc(projectId)
+    .collection('logs')
+    .get()
+
+  const data = querySnapshot.docs.map((doc: any) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    }
+  })
+
+  return data
+}
+
+/*
   Create a new log.
 */
 const addLog = (
@@ -84,4 +109,11 @@ const addLog = (
 const findOrCreateUser = (userId: FirestoreUserId, data: Object) => {
   db.collection('users').doc(userId).set(data, { merge: true })
 }
-export { addProject, getProjects, getProject, addLog, findOrCreateUser }
+export {
+  addProject,
+  getProjects,
+  getProject,
+  addLog,
+  findOrCreateUser,
+  getLogs,
+}
