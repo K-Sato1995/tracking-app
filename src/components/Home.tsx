@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
 import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
+import { Card, CardHeader, CardContent, Grid } from '@material-ui/core'
 
 const Home = () => {
   const { user } = useAuth0()
@@ -33,15 +34,22 @@ const Home = () => {
       >
         New Project
       </button>
-      <ul>
+      <Grid container spacing={2}>
         {projects.map((project, i) => {
           return (
-            <li key={i}>
-              <Link to={`project/${project.id}`}>{project.title}</Link>
-            </li>
+            <Grid item xs={6} sm={4} key={i}>
+              <Card>
+                <CardHeader
+                  title={
+                    <Link to={`project/${project.id}`}>{project.title}</Link>
+                  }
+                />
+                <CardContent>Description</CardContent>
+              </Card>
+            </Grid>
           )
         })}
-      </ul>
+      </Grid>
     </div>
   )
 }
