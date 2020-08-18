@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import LocalAirportSharpIcon from '@material-ui/icons/LocalAirportSharp'
+import { useHistory } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const { logout } = useAuth0()
+  let history = useHistory()
   const classes = useStyles()
 
   return (
@@ -32,13 +34,21 @@ const Header = () => {
           className={classes.menuButton}
           color="inherit"
           aria-label="menu"
+          onClick={() => history.push('/')}
         >
           <LocalAirportSharpIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           PLOGress
         </Typography>
-
+        <Button
+          color="inherit"
+          onClick={() => {
+            history.push(`/user_info`)
+          }}
+        >
+          User Page
+        </Button>
         <Button color="inherit" onClick={() => logout()}>
           Log Out
         </Button>

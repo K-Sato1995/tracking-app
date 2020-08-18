@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
 import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
-import { Card, CardHeader, CardContent, Grid } from '@material-ui/core'
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Grid,
+  IconButton,
+} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+
+const Title = styled(Link)`
+  text-decoration: none;
+`
 
 const Home = () => {
   const { user } = useAuth0()
@@ -41,7 +53,7 @@ const Home = () => {
               <Card>
                 <CardHeader
                   title={
-                    <Link to={`project/${project.id}`}>{project.title}</Link>
+                    <Title to={`project/${project.id}`}>{project.title}</Title>
                   }
                 />
                 <CardContent>Description</CardContent>
@@ -49,6 +61,13 @@ const Home = () => {
             </Grid>
           )
         })}
+        <Grid item xs={6} sm={4}>
+          <Card>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <AddIcon />
+            </IconButton>
+          </Card>
+        </Grid>
       </Grid>
     </div>
   )
