@@ -5,12 +5,14 @@ import Home from 'components/Home'
 import PageNotFound from 'components/PageNotFound'
 import ProjectDetail from 'components/ProjectDetail'
 import UserDetail from 'components/UserDetail'
+import NewProject from 'components/NewProject'
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
+      <Route exact path="/project/new" component={NewProject} />
       <Route path="/project/:id" component={ProjectDetail} />
       <Route path="/user_info" component={UserDetail} />
       <Route path="*" exact={true} component={PageNotFound} />

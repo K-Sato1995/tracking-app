@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
-import { addProject, findOrCreateUser, getProjects } from 'utilities/Firebase'
+import { findOrCreateUser, getProjects } from 'utilities/Firebase'
+import { useHistory } from 'react-router-dom'
 import {
   Card,
   CardHeader,
@@ -19,6 +20,7 @@ const Title = styled(Link)`
 const Home = () => {
   const { user } = useAuth0()
   const { sub: userId, email } = user
+  const history = useHistory()
   const [projects, setProjects] = useState<Project[]>([])
 
   useEffect(() => {
@@ -37,15 +39,6 @@ const Home = () => {
 
   return (
     <div className="App">
-      <button
-        onClick={() =>
-          addProject(userId, {
-            title: 'new',
-          })
-        }
-      >
-        New Project
-      </button>
       <Grid container spacing={2}>
         {projects.map((project, i) => {
           return (
@@ -56,14 +49,19 @@ const Home = () => {
                     <Title to={`project/${project.id}`}>{project.title}</Title>
                   }
                 />
-                <CardContent>Description</CardContent>
+                <CardContent>{project.description}</CardContent>
               </Card>
             </Grid>
           )
         })}
         <Grid item xs={6} sm={4}>
           <Card>
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => history.push('/project/new')}
+            >
               <AddIcon />
             </IconButton>
           </Card>

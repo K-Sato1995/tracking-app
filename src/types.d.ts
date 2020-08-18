@@ -12,6 +12,7 @@ type FirestoreProjectId = 'string'
 type Project = {
   id?: string
   title?: string
+  description?: string
 }
 /*
  Log data type
