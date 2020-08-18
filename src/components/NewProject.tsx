@@ -39,7 +39,7 @@ const NewProject = () => {
         }}
       >
         <Grid container spacing={1}>
-          <Grid item sm={12}>
+          <Grid item xs={12} sm={12}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -52,7 +52,7 @@ const NewProject = () => {
             />
           </Grid>
 
-          <Grid item sm={12}>
+          <Grid item xs={12} sm={12}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -67,7 +67,7 @@ const NewProject = () => {
             />
           </Grid>
 
-          <Grid item sm={12}>
+          <Grid item xs={12} sm={12}>
             <Button type="submit" fullWidth variant="contained" color="primary">
               Submit
             </Button>
