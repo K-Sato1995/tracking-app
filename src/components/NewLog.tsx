@@ -12,7 +12,7 @@ const logDefaultValue: Log = {
   title: '',
   description: '',
   category: '',
-  time: undefined,
+  time: 0,
   date: new Date(),
 }
 

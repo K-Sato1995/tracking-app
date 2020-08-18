@@ -21,6 +21,6 @@ type Log = {
   title: string
   description?: string
   category: string
-  time?: number
+  time: number
   date: Date
 }
