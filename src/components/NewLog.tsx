@@ -8,7 +8,7 @@ import styled from 'styled-components'
 const FormContainer = styled(Paper)`
   padding: 1em;
 `
-const logDefaultValue: Log = {
+const defaultLogValue: Log = {
   title: '',
   description: '',
   category: '',
@@ -22,7 +22,7 @@ const NewLog = () => {
   const history = useHistory()
   const { id: projectId } = useParams()
 
-  const [log, setLog] = useState<Log>(logDefaultValue)
+  const [log, setLog] = useState<Log>(defaultLogValue)
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -55,7 +55,7 @@ const NewLog = () => {
           addLog(userId, projectId, {
             ...log,
           })
-          setLog(logDefaultValue)
+          setLog(defaultLogValue)
         }}
       >
         <Grid container spacing={1}>
