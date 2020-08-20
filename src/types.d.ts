@@ -13,8 +13,15 @@ type ChartType = 'calendar' | 'bar'
 /*
   Acceptable field Type
 */
-type AcceptableValueType = string | boolean | number
+type FieldAcceptableValueType = 'string' | 'boolean' | 'number'
 
+/*
+ Field Input Type
+*/
+interface FieldInput {
+  name: string
+  type: FieldAcceptableValueType
+}
 /*
  Project data type
 */
@@ -22,9 +29,7 @@ type Project = {
   id?: string
   title?: string
   description?: string
-  fields?: {
-    [key: string]: AcceptableValueType
-  }
+  fields?: FieldInput[]
   charts?: {
     [id in ChartType]: boolean
   }
@@ -42,6 +47,18 @@ type ProjectReducerAction =
       name: string
       value: boolean | string
     }
+  | {
+      type: 'UPDATE_FIELD_VALUE'
+      id: number
+      name: string
+      value: string
+    }
+  | {
+      type: 'ADD_FIELD_INPUT'
+    }
+  | {
+      type: 'REMOVE_FIELD_INPUT'
+    }
 /*
  Log data type
 */
@@ -52,7 +69,6 @@ type Log = {
   time: number
   date: Date
 }
-
 /*
   Type of data that should be given to a calendar chart
 */
