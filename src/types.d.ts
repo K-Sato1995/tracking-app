@@ -18,7 +18,7 @@ type FieldAcceptableValueType = 'string' | 'boolean' | 'number'
 /*
  Field Input Type
 */
-interface FieldInput {
+type FieldInput = {
   name: string
   type: FieldAcceptableValueType
 }
@@ -60,14 +60,18 @@ type ProjectReducerAction =
       type: 'REMOVE_FIELD_INPUT'
     }
 /*
+ Log field type
+*/
+type LogFieldType =
+  | (FieldInput & { value: { [key: string]: string } })
+  | (FieldInput & { value: { [key: string]: number } })
+  | (FieldInput & { value: { [key: string]: boolean } })
+
+/*
  Log data type
 */
 type Log = {
-  title: string
-  description?: string
-  category: string
-  time: number
-  date: Date
+  fields: LogFieldType[]
 }
 /*
   Type of data that should be given to a calendar chart

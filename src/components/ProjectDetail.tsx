@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import CalendarChart from 'components/Charts/CalendarChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
 import { getProject, getLogs } from 'utilities/Firebase'
@@ -45,20 +44,18 @@ const ProjectDetail = () => {
   }, [userId, projectId, history])
 
   //TODO: Merge the values of the same date
-  const calendarChartDataSet = logs.map((log) => {
-    const { date, time } = log
-    const subset = { day: date.toString(), value: time }
-    return subset
-  })
-
+  // const calendarChartDataSet = logs.map((log) => {
+  //   const { date, time } = log
+  //   const subset = { day: date.toString(), value: time }
+  //   return subset
+  // })
+  console.log(logs)
   if (loading) return <>Loading</>
 
   return (
     <ProjectDetailContainer>
       <Typography variant="h3">{project.title}</Typography>
-      <ChartContainer>
-        <CalendarChart data={calendarChartDataSet} />
-      </ChartContainer>
+      <ChartContainer></ChartContainer>
       <Button
         variant="contained"
         color="primary"
