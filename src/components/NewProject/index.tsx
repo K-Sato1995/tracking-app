@@ -23,18 +23,15 @@ const NewProject = () => {
     initialProjectValue,
   )
 
-  const updateProjectValue = (field: string, value: string) => {
+  const updateValue = (
+    path: 'project' | 'charts' | 'fields',
+    name: string,
+    value: string | boolean,
+  ) => {
     dispatch({
-      type: 'CHANGE_PROJECT_VALUE',
-      field: field,
-      value: value,
-    })
-  }
-
-  const updateProjectChartValue = (field: string, value: boolean) => {
-    dispatch({
-      type: 'CHANGE_CHARTS_VALUE',
-      field: field,
+      type: 'UPDATE_VALUE',
+      path: path,
+      name: name,
       value: value,
     })
   }
@@ -64,7 +61,7 @@ const NewProject = () => {
               value={projectState.title}
               placeholder="Title"
               onChange={(e) => {
-                updateProjectValue(e.target.name, e.target.value)
+                updateValue('project', e.target.name, e.target.value)
               }}
             />
           </Grid>
@@ -81,7 +78,7 @@ const NewProject = () => {
               value={projectState.description}
               name="description"
               onChange={(e) => {
-                updateProjectValue(e.target.name, e.target.value)
+                updateValue('project', e.target.name, e.target.value)
               }}
             />
           </Grid>
@@ -93,7 +90,7 @@ const NewProject = () => {
                   checked={projectState.charts?.calendar}
                   name="calendar"
                   onChange={(e) => {
-                    updateProjectChartValue(e.target.name, e.target.checked)
+                    updateValue('charts', e.target.name, e.target.checked)
                   }}
                 />
               }
@@ -105,7 +102,7 @@ const NewProject = () => {
                   checked={projectState.charts?.bar}
                   name="bar"
                   onChange={(e) => {
-                    updateProjectChartValue(e.target.name, e.target.checked)
+                    updateValue('charts', e.target.name, e.target.checked)
                   }}
                 />
               }

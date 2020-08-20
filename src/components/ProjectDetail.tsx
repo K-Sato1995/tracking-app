@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { getProject, getLogs } from 'utilities/Firebase'
 import { useHistory } from 'react-router-dom'
 import { Paper, Button, Typography } from '@material-ui/core'
-import { ResponsiveCalendar } from '@nivo/calendar'
 import styled from 'styled-components'
 
 const ProjectDetailContainer = styled(Paper)`

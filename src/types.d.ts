@@ -10,6 +10,10 @@ type FirestoreProjectId = 'string'
   Types for available charts
 */
 type ChartType = 'calendar' | 'bar'
+/*
+  Acceptable field Type
+*/
+type AcceptableValueType = string | boolean | number
 
 /*
  Project data type
@@ -18,6 +22,9 @@ type Project = {
   id?: string
   title?: string
   description?: string
+  fields?: {
+    [key: string]: AcceptableValueType
+  }
   charts?: {
     [id in ChartType]: boolean
   }
@@ -30,14 +37,10 @@ type ProjectReducerAction =
       type: 'RESET_STATE'
     }
   | {
-      type: 'CHANGE_PROJECT_VALUE'
-      field: string
-      value: string
-    }
-  | {
-      type: 'CHANGE_CHARTS_VALUE'
-      field: string
-      value: boolean
+      type: 'UPDATE_VALUE'
+      path: 'project' | 'charts' | 'fields'
+      name: string
+      value: boolean | string
     }
 /*
  Log data type
