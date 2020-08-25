@@ -2,10 +2,40 @@ import React from 'react'
 import { ResponsiveCalendar } from '@nivo/calendar'
 import { Typography } from '@material-ui/core'
 
-const CalendarChart = ({ data }: { data: CalendarChartData }) => {
+interface Props {
+  logs: Log[]
+  correspondingFields: { used: boolean; day: string; value: string }
+}
+
+const CalendarChart = ({ logs, correspondingFields }: Props) => {
+  const nameOfDayField = correspondingFields.day
+  const nameOfValueField = correspondingFields.value
+
+  // ideal Outcome: { day: string, value: number }[]
+  const calendarChartDataSet = logs.map((log) => {
+    const data = { day: '', value: 0 }
+
+    const requiredFields = log.fields.filter((field) => {
+      return field.name === nameOfDayField || field.name === nameOfValueField
+    })
+    // log: {id: string, fields: Field[]}
+    // field: { name: string, type: string, value: { [name]: [type]} }
+
+    requiredFields.map((field) => {
+      if (field.name === nameOfDayField) {
+        data.day = field.value[nameOfDayField] as string
+      }
+
+      if (field.name === nameOfValueField) {
+        data.value = parseInt(field.value[nameOfValueField] as string)
+      }
+    })
+    return data
+  })
+
   return (
     <ResponsiveCalendar
-      data={data}
+      data={calendarChartDataSet}
       from="2019-01-01"
       to="2020-12-31"
       emptyColor="#eeeeee"

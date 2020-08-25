@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import CalendarChart from 'components/Charts/CalendarChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
 import { getProject, getLogs } from 'utilities/Firebase'
@@ -22,7 +23,9 @@ const ProjectDetail = () => {
   const { sub: userId } = user
 
   if (!projectId) throw new Error()
-  const [project, setProject] = useState<Project>({})
+  const [project, setProject] = useState<Project>({
+    charts: { calendar: { used: false, day: '', value: '' } },
+  })
   const [logs, setLogs] = useState<Log[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -49,13 +52,29 @@ const ProjectDetail = () => {
   //   const subset = { day: date.toString(), value: time }
   //   return subset
   // })
-  console.log(logs)
   if (loading) return <>Loading</>
 
   return (
     <ProjectDetailContainer>
       <Typography variant="h3">{project.title}</Typography>
-      <ChartContainer></ChartContainer>
+      <ChartContainer>
+        {/* {if(project.charts.calendar.used){ return }}*/}
+        <CalendarChart
+          logs={logs}
+          correspondingFields={project.charts?.calendar}
+        />
+      </ChartContainer>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          history.push(`/project/${projectId}/add_chart`)
+        }}
+      >
+        Add charts to visually see your progress
+      </Button>
+
       <Button
         variant="contained"
         color="primary"

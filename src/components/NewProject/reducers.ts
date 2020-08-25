@@ -3,8 +3,11 @@ const initialProjectValue: Project = {
   description: '',
   fields: [{ name: 'title', type: 'string' }],
   charts: {
-    calendar: false,
-    bar: false,
+    calendar: {
+      used: false,
+      day: '',
+      value: '',
+    },
   },
 }
 

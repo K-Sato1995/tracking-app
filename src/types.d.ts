@@ -30,8 +30,15 @@ type Project = {
   title?: string
   description?: string
   fields?: FieldInput[]
-  charts?: {
-    [id in ChartType]: boolean
+  // charts?: {
+  //   [id in ChartType]: boolean
+  // }
+  charts: {
+    calendar: {
+      used: boolean
+      day: string
+      value: string
+    }
   }
 }
 /*

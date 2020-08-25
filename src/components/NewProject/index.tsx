@@ -53,7 +53,6 @@ const NewProject = () => {
   const addFieldInput = () => dispatch({ type: 'ADD_FIELD_INPUT' })
   const removeFieldInput = () => dispatch({ type: 'REMOVE_FIELD_INPUT' })
 
-  console.log(projectState)
   return (
     <FormContainer>
       <Typography variant="h3">Create a new Project</Typography>
@@ -126,7 +125,7 @@ const NewProject = () => {
               <RemoveIcon />
             </IconButton>
           </Grid>
-
+          {/* 
           <Grid item xs={12} sm={12}>
             <FormControlLabel
               control={
@@ -152,7 +151,7 @@ const NewProject = () => {
               }
               label="Bar"
             />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} sm={12}>
             <Button type="submit" fullWidth variant="contained" color="primary">
