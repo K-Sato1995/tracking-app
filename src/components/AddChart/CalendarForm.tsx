@@ -26,12 +26,7 @@ const CalendarForm = ({ fields }: Props) => {
   const { sub: userId } = user
   const history = useHistory()
   const { id: projectId } = useParams()
-  // TODO: Create a form to assign fields to ResponsiveCalendar's required fields.
-  /*
-    day: Show only date fields
-    value: Show only number fields
-  */
-  console.log(calendarValues)
+
   return (
     <FormContainer>
       <Typography variant="h3">Select fields</Typography>
