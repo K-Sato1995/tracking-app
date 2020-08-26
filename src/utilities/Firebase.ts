@@ -57,6 +57,31 @@ const getProject = async (
 }
 
 /*
+  Update project values
+*/
+const updateProject = (
+  userId: FirestoreUserId,
+  projectId: FirestoreProjectId,
+  data: Object,
+) => {
+  db.collection('users')
+    .doc(userId)
+    .collection('projects')
+    .doc(projectId)
+    .update({
+      charts: {
+        calendar: data,
+      },
+    })
+    .then(function () {
+      alert('The project was successfully updated!')
+    })
+    .catch(function (error: any) {
+      alert(`Error: ${error}`)
+    })
+}
+
+/*
   Get all the projects associated with the user.
 */
 const getLogs = async (
@@ -113,6 +138,7 @@ export {
   addProject,
   getProjects,
   getProject,
+  updateProject,
   addLog,
   findOrCreateUser,
   getLogs,

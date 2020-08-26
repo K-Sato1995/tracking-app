@@ -33,6 +33,7 @@ const CalendarChart = ({ logs, correspondingFields }: Props) => {
     return data
   })
 
+  // TODO: Customise ResponsiveCalendar
   return (
     <ResponsiveCalendar
       data={calendarChartDataSet}
