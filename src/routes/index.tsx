@@ -7,7 +7,6 @@ import ProjectDetail from 'components/ProjectDetail'
 import UserDetail from 'components/UserDetail'
 import NewProject from 'components/NewProject'
 import NewLog from 'components/NewLog'
-import AddChart from 'components/AddChart'
 
 const Routes: React.FC = () => {
   return (
@@ -18,7 +17,6 @@ const Routes: React.FC = () => {
       <Route exact path="/project/:id" component={ProjectDetail} />
       <Route exact path="/project/:id/new_log" component={NewLog} />
       <Route path="/user_info" component={UserDetail} />
-      <Route exact path="/project/:id/add_chart" component={AddChart} />
       <Route path="*" exact={true} component={PageNotFound} />
     </Switch>
   )

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import CalendarChart from 'components/Charts/CalendarChart'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
 import { getProject, getLogs } from 'utilities/Firebase'
@@ -10,22 +9,15 @@ import styled from 'styled-components'
 const ProjectDetailContainer = styled(Paper)`
   padding: 1em;
 `
-const ChartContainer = styled.div`
-  height: 500px;
-`
-// TODO:
-// Make it able to customise the page.
-// For instance, a user can choose which charts they want to show on each project.
 const ProjectDetail = () => {
-  const { id: projectId } = useParams()
+  const { id: projectId } = useParams<RouteParams>()
   let history = useHistory()
   const { user } = useAuth0()
   const { sub: userId } = user
 
   if (!projectId) throw new Error()
-  const [project, setProject] = useState<Project>({
-    charts: { calendar: { used: false, day: '', value: '' } },
-  })
+
+  const [project, setProject] = useState<Project>({})
   const [logs, setLogs] = useState<Log[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -46,35 +38,20 @@ const ProjectDetail = () => {
     fetchProjects()
   }, [userId, projectId, history])
 
-  //TODO: Merge the values of the same date
-  // const calendarChartDataSet = logs.map((log) => {
-  //   const { date, time } = log
-  //   const subset = { day: date.toString(), value: time }
-  //   return subset
-  // })
   if (loading) return <>Loading</>
 
   return (
     <ProjectDetailContainer>
       <Typography variant="h3">{project.title}</Typography>
-      <ChartContainer>
-        {/* {if(project.charts.calendar.used){ return }}*/}
-        <CalendarChart
-          logs={logs}
-          correspondingFields={project.charts?.calendar}
-        />
-      </ChartContainer>
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          history.push(`/project/${projectId}/add_chart`)
-        }}
-      >
-        Add charts to visually see your progress
-      </Button>
-
+      <ul>
+        {logs.map((log, index) => {
+          return (
+            <li key={index}>
+              {log.date}: {log.description}
+            </li>
+          )
+        })}
+      </ul>
       <Button
         variant="contained"
         color="primary"

@@ -11,7 +11,7 @@ const UserDetail = () => {
 
   if (error) return <Redirect to="404" />
 
-  const { 'https://mynamespace/username': userName } = user
+  const { userName } = user
 
   return (
     <div>
