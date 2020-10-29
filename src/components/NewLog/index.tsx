@@ -10,7 +10,7 @@ const NewLog = () => {
   const { sub: userId } = user
   const history = useHistory()
   const { id: projectId } = useParams<RouteParams>()
-  const [log, setLog] = useState<Log>({ date: '', description: '' })
+  const [log, setLog] = useState<Log>({ date: '', time: 1, description: '' })
 
   return (
     <FormContainer>
@@ -30,11 +30,25 @@ const NewLog = () => {
               margin="normal"
               required
               fullWidth
-              name="Date"
+              name="date"
               type="date"
               value={log.date}
               onChange={(e) => {
                 setLog({ ...log, date: e.target.value })
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={12}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              type="number"
+              value={log.time.toString()}
+              onChange={(e) => {
+                setLog({ ...log, time: Number(e.target.value) })
               }}
             />
           </Grid>

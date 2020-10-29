@@ -47,7 +47,7 @@ const ProjectDetail = () => {
         {logs.map((log, index) => {
           return (
             <li key={index}>
-              {log.date}: {log.description}
+              {log.date}: {log.time} :{log.description}
             </li>
           )
         })}
