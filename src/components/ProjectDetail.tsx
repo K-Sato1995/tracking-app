@@ -3,7 +3,17 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
 import { getProject, getLogs } from 'utilities/Firebase'
 import { useHistory } from 'react-router-dom'
-import { Paper, Button, Typography } from '@material-ui/core'
+import {
+  Paper,
+  Button,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core'
 import styled from 'styled-components'
 
 const ProjectDetailContainer = styled(Paper)`
@@ -43,15 +53,26 @@ const ProjectDetail = () => {
   return (
     <ProjectDetailContainer>
       <Typography variant="h3">{project.title}</Typography>
-      <ul>
-        {logs.map((log, index) => {
-          return (
-            <li key={index}>
-              {log.date}: {log.time} :{log.description}
-            </li>
-          )
-        })}
-      </ul>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Description</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {logs.map((log, index) => (
+              <TableRow key={index}>
+                <TableCell>{log.date}</TableCell>
+                <TableCell>{log.time}</TableCell>
+                <TableCell>{log.description}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <Button
         variant="contained"
         color="primary"
@@ -60,6 +81,15 @@ const ProjectDetail = () => {
         }}
       >
         Create a new Log
+      </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          history.push(`/project/${projectId}/edit`)
+        }}
+      >
+        Edit This Project
       </Button>
     </ProjectDetailContainer>
   )

@@ -68,11 +68,7 @@ const updateProject = (
     .doc(userId)
     .collection('projects')
     .doc(projectId)
-    .update({
-      charts: {
-        calendar: data,
-      },
-    })
+    .update(data)
     .then(function () {
       alert('The project was successfully updated!')
     })
@@ -134,6 +130,7 @@ const addLog = (
 const findOrCreateUser = (userId: FirestoreUserId, data: Object) => {
   db.collection('users').doc(userId).set(data, { merge: true })
 }
+
 export {
   addProject,
   getProjects,

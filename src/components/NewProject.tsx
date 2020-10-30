@@ -1,30 +1,23 @@
-import React, { useReducer } from 'react'
-import {
-  initialProjectValue,
-  projectReducer,
-} from 'components/NewProject/reducers'
+import React, { useState } from 'react'
 import { addProject } from 'utilities/Firebase'
 import { useAuth0 } from '@auth0/auth0-react'
 import { TextField, Grid, Button, Typography } from '@material-ui/core'
-import { FormContainer } from 'components/NewProject/styles'
+import styled from 'styled-components'
+import { Paper } from '@material-ui/core'
+
+const FormContainer = styled(Paper)`
+  padding: 1em;
+`
+
+const initialProjectValue: Project = {
+  title: '',
+  description: '',
+}
 
 const NewProject = () => {
+  const [project, setProject] = useState<Project>(initialProjectValue)
   const { user } = useAuth0()
   const { sub: userId } = user
-  const [projectState, dispatch] = useReducer(
-    projectReducer,
-    initialProjectValue,
-  )
-
-  const updateValue = (name: string, value: string) => {
-    dispatch({
-      type: 'UPDATE_VALUE',
-      name: name,
-      value: value,
-    })
-  }
-
-  const resetProjectState = () => dispatch({ type: 'RESET_STATE' })
 
   return (
     <FormContainer>
@@ -33,9 +26,9 @@ const NewProject = () => {
         onSubmit={(e) => {
           e.preventDefault()
           addProject(userId, {
-            ...projectState,
+            ...project,
           })
-          resetProjectState()
+          setProject(initialProjectValue)
         }}
       >
         <Grid container spacing={1}>
@@ -46,10 +39,10 @@ const NewProject = () => {
               required
               fullWidth
               name="title"
-              value={projectState.title}
+              value={project.title}
               placeholder="Title"
               onChange={(e) => {
-                updateValue(e.target.name, e.target.value)
+                setProject({ ...project, title: e.target.value })
               }}
             />
           </Grid>
@@ -63,10 +56,10 @@ const NewProject = () => {
               fullWidth
               required
               placeholder="description"
-              value={projectState.description}
+              value={project.description}
               name="description"
               onChange={(e) => {
-                updateValue(e.target.name, e.target.value)
+                setProject({ ...project, description: e.target.value })
               }}
             />
           </Grid>

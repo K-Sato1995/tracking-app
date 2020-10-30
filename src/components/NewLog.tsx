@@ -3,14 +3,20 @@ import { addLog } from 'utilities/Firebase'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useHistory, useParams } from 'react-router-dom'
 import { Grid, Button, Typography, TextField } from '@material-ui/core'
-import { FormContainer } from 'components/NewLog/styles'
+import styled from 'styled-components'
+import { Paper } from '@material-ui/core'
+
+const FormContainer = styled(Paper)`
+  padding: 1em;
+`
 
 const NewLog = () => {
+  const initialLogValue = { date: '', time: 0, description: '' }
   const { user } = useAuth0()
   const { sub: userId } = user
   const history = useHistory()
   const { id: projectId } = useParams<RouteParams>()
-  const [log, setLog] = useState<Log>({ date: '', time: 1, description: '' })
+  const [log, setLog] = useState<Log>(initialLogValue)
 
   return (
     <FormContainer>
@@ -21,6 +27,7 @@ const NewLog = () => {
           addLog(userId, projectId, {
             ...log,
           })
+          setLog(initialLogValue)
         }}
       >
         <Grid container spacing={1}>
