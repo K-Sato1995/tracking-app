@@ -7,6 +7,7 @@ import ProjectDetail from 'components/ProjectDetail'
 import UserDetail from 'components/UserDetail'
 import NewProject from 'components/NewProject'
 import NewLog from 'components/NewLog'
+import EditProject from 'components/EditProject'
 
 const Routes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const Routes: React.FC = () => {
       <Route exact path="/project/new" component={NewProject} />
       <Route exact path="/project/:id" component={ProjectDetail} />
       <Route exact path="/project/:id/new_log" component={NewLog} />
+      <Route exact path="/project/:id/edit" component={EditProject} />
       <Route path="/user_info" component={UserDetail} />
       <Route path="*" exact={true} component={PageNotFound} />
     </Switch>

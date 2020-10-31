@@ -48,6 +48,7 @@ type ProjectReducerAction =
 */
 type Log = {
   date: string
+  time: number
   description: string
 }
 
