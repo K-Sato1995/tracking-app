@@ -39,6 +39,7 @@ const Home = () => {
 
   return (
     <div className="App">
+      <h1>Top Page</h1>
       <Grid container spacing={2}>
         {projects.map((project, i) => {
           return (
