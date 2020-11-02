@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useParams } from 'react-router-dom'
-import { getProject, getLogs } from 'utilities/Firebase'
+import firebaseUtilities from 'utilities/Firebase'
 import { useHistory } from 'react-router-dom'
 import {
   Paper,
@@ -24,6 +24,7 @@ const ProjectDetail = () => {
   let history = useHistory()
   const { user } = useAuth0()
   const { sub: userId } = user
+  const { getProject, getLogs } = firebaseUtilities
 
   if (!projectId) throw new Error()
 
@@ -46,7 +47,7 @@ const ProjectDetail = () => {
     }
 
     fetchProjects()
-  }, [userId, projectId, history])
+  }, [userId, projectId, history, getProject, getLogs])
 
   if (loading) return <>Loading</>
 

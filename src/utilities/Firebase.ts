@@ -1,4 +1,4 @@
-import { db } from 'firebaseConfig'
+import { db } from 'firebase/config'
 /*
   Create a new Project.
 */
@@ -131,7 +131,7 @@ const findOrCreateUser = (userId: FirestoreUserId, data: Object) => {
   db.collection('users').doc(userId).set(data, { merge: true })
 }
 
-export {
+const exportedFunctions = {
   addProject,
   getProjects,
   getProject,
@@ -140,3 +140,5 @@ export {
   findOrCreateUser,
   getLogs,
 }
+
+export default exportedFunctions

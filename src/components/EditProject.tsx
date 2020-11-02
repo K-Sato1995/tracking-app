@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { updateProject } from 'utilities/Firebase'
 import { useAuth0 } from '@auth0/auth0-react'
 import { TextField, Grid, Button, Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { Paper } from '@material-ui/core'
 import { useParams, useHistory } from 'react-router-dom'
-import { getProject } from 'utilities/Firebase'
+import firebaseUtilities from 'utilities/Firebase'
 
 const FormContainer = styled(Paper)`
   padding: 1em;
@@ -16,7 +15,7 @@ const EditProject = () => {
   let history = useHistory()
   const { user } = useAuth0()
   const { sub: userId } = user
-
+  const { updateProject, getProject } = firebaseUtilities
   if (!projectId) throw new Error()
 
   const [project, setProject] = useState<Project>({})
@@ -34,7 +33,7 @@ const EditProject = () => {
       }
     }
     fetchProjects()
-  }, [userId, projectId, history])
+  }, [userId, projectId, history, getProject])
 
   if (loading) return <>Loading</>
 

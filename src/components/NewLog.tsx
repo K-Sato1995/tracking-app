@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addLog } from 'utilities/Firebase'
+import firebaseUtilities from 'utilities/Firebase'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useHistory, useParams } from 'react-router-dom'
 import { Grid, Button, Typography, TextField } from '@material-ui/core'
@@ -17,6 +17,7 @@ const NewLog = () => {
   const history = useHistory()
   const { id: projectId } = useParams<RouteParams>()
   const [log, setLog] = useState<Log>(initialLogValue)
+  const { addLog } = firebaseUtilities
 
   return (
     <FormContainer>
