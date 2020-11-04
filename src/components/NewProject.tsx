@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addProject } from 'utilities/Firebase'
+import firebaseUtilities from 'utilities/Firebase'
 import { useAuth0 } from '@auth0/auth0-react'
 import { TextField, Grid, Button, Typography } from '@material-ui/core'
 import styled from 'styled-components'
@@ -18,6 +18,7 @@ const NewProject = () => {
   const [project, setProject] = useState<Project>(initialProjectValue)
   const { user } = useAuth0()
   const { sub: userId } = user
+  const { addProject } = firebaseUtilities
 
   return (
     <FormContainer>

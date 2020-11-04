@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
-import { findOrCreateUser, getProjects } from 'utilities/Firebase'
+import firebaseUtilities from 'utilities/Firebase'
 import { useHistory } from 'react-router-dom'
 import {
   Card,
@@ -22,6 +22,7 @@ const Home = () => {
   const { sub: userId, email } = user
   const history = useHistory()
   const [projects, setProjects] = useState<Project[]>([])
+  const { findOrCreateUser, getProjects } = firebaseUtilities
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -32,10 +33,9 @@ const Home = () => {
         console.log(e)
       }
     }
-
     findOrCreateUser(userId, { email: email })
     fetchProjects()
-  }, [email, userId])
+  }, [email, findOrCreateUser, getProjects, userId])
 
   return (
     <div className="App">
