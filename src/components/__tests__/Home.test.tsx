@@ -15,12 +15,11 @@ test('Initial State', () => {
 })
 
 test('Display projects', async () => {
-  firebaseUtilities.getProjects = jest.fn().mockResolvedValue([
-    { id: 'test1', name: 'unique', description: 'test-unique' },
-    { id: 'test2', name: 'test2', description: 'test3' },
-    { id: 'test3', name: 'test3', description: 'test2' },
-    { id: 'test4', name: 'test4', description: 'test1' },
-  ])
+  firebaseUtilities.getProjects = jest
+    .fn()
+    .mockResolvedValue([
+      { id: 'test1', name: 'unique', description: 'test-unique' },
+    ])
 
   render(
     <Router>
